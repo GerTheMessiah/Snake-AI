@@ -1,4 +1,4 @@
-# PPO (Proximal Policy Optimization) - Reinforcement Learning
+# PPO and DQN - Reinforcement Learning
 
 ## Snake-AI
 
@@ -28,13 +28,9 @@
 
 
 ## [PPO - Implementation](src/snakeAI/agents/ppo/actor_critic.py)
-The current built of my PPO was inspired by:\
+The current built of my PPO and my DQN was inspired by:\
 Phil Tabor: [Phil Tabor - Repository](https://github.com/philtabor/Youtube-Code-Repository/tree/master/ReinforcementLearning/PolicyGradient/PPO/torch) \
 Nikhil Barhate: [nikhilbarhate99 - Repository](https://github.com/nikhilbarhate99/PPO-PyTorch)
-
-
-## References
-- [PPO paper](https://arxiv.org/abs/1707.06347)
 
 
 ## License
