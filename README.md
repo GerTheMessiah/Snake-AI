@@ -11,7 +11,7 @@
 [![Version](https://img.shields.io/static/v1?label=Version&message=0.2&color=green)]()
 [![Contributors](https://img.shields.io/static/v1?label=Contributors&message=1&color=yellow)]()
 
-## [Observation](src/snakeAI/gym_game/snake_env/observation.py)
+## [Observation](src/gym_snake/envs/snake_env/observation.py)
 ![obs](src/resources/images/observation.png)
 ### Visual observation
 - Visual observation. The AI is observing a 13x13 space around this head. Six on the left and right site and the Head in the middle.
@@ -21,16 +21,14 @@
 - apple (blue point) and tail compass. Indicates the relativ position according to the apple or the last part of the snake.
 - step counter. If the snake doesn't eat an apple in a descried amount of steps the game ends.
 
-## [Evaluation / Reward](src/snakeAI/gym_game/snake_env/snake_game_2d.py)
+## [Evaluation / Reward](src/gym_snake/envs/snake_env/reward.py)
 ### +100 if the snake reaches the max length. | win
 ### +2.5 if snake eats an apple.
 ### -10 if the snake dies. | loss
 
 
-## [PPO - Implementation](src/snakeAI/agents/ppo/)
-The current built of my PPO and my DQN was inspired by:\
-Phil Tabor: [Phil Tabor - Repository](https://github.com/philtabor/Youtube-Code-Repository/tree/master/ReinforcementLearning/PolicyGradient/PPO/torch) \
-Nikhil Barhate: [nikhilbarhate99 - Repository](https://github.com/nikhilbarhate99/PPO-PyTorch)
+## [PPO - Implementation](src/snakeAI/agents/ppo_model.py)
+- Implementation with ray tune.
 
 
 ## License
@@ -38,21 +36,10 @@ Nikhil Barhate: [nikhilbarhate99 - Repository](https://github.com/nikhilbarhate9
 
 
 ## Results
-<img src="src/resources/images/SnakeAI.gif"  width="450" height="450">
+<img src="src/resources/images/SnakeAI.gif" width="450" height="450" alt="0">
 
 
 ## Dependencies
-```
-Libraries           | Functions
------------------------------------------------
-...                 | ...
-python 3.7          | Python version
-gym 0.18.0          | Game setup
-pygame 2.0.0        | Game gui
-numpy 1.20.1        | Creating observations
-Pytorch 1.8.0cuda   | AI-API
-ray 1.2.0           | Multiprocessing framework
-scipy 1.5.2         | Linear regression
-matplotlib 3.3.2    | Result plots
- 
-```
+
+Install packages: ```pip install -r requirements.txt```\
+Be careful with pytorch dependencies. They often might not work with. If so, install on your own.
