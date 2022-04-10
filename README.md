@@ -1,4 +1,4 @@
-# PPO and DQN - Reinforcement Learning
+# PPO - Reinforcement Learning
 
 ## Snake-AI
 
