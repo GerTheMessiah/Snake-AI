@@ -1,13 +1,10 @@
-pygame==2.1.2
-numpy==1.22.3
---find-links https://download.pytorch.org/whl/cu113/torch_stable.html
-torch==1.11.0+cu113
-torchvision==0.12.0+cu113
-torchaudio===0.11.0+cu113
-scipy==1.8.0
-gym==0.21.0
-pandas==1.4.1
-matplotlib==3.5.1
-ray==1.11.0
-dm_tree==0.1.6
+numpy==1.24.1
+scipy==1.11.0
+gymnasium==0.28.1
+pandas==2.0.2
+matplotlib==3.7.1
+ray==2.5.1
+dm_tree==0.1.8
 
+torch~=2.0.1+cu118
+tqdm~=4.65.0
