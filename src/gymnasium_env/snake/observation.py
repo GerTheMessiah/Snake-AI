@@ -23,14 +23,14 @@ class Observation:
         for i in [-1, 0, 1]:
             tmp_next_pos = [tail[0][0], tail[0][1]]
             tmp_next_pos[((direction + i) % 4) % 2] += -1 if ((direction + i) % 4) % 3 == 0 else 1
+
             if _on_playground(tmp_next_pos[0], tmp_next_pos[1], self.matrix_shape):
                 matrix[2, tmp_next_pos[0], tmp_next_pos[1]] = 1
 
         if len(tail) > 1:
             matrix[3, tail[-1][0], tail[-1][1]] = 1
 
-        if apple is not None:
-            matrix[4, apple[0], apple[1]] = 1
+        matrix[4, apple[0], apple[1]] = 1
 
         it = np.ones((1, self.matrix_shape[0], self.matrix_shape[1]), dtype=np.float32) * (hunger / 1000)
         if self.previous_obs is None:
@@ -42,4 +42,4 @@ class Observation:
             self.previous_obs = matrix.copy()
             matrix = np.concatenate([matrix, tmp, it], axis=0)
 
-        return matrix
+        return np.expand_dims(matrix, axis=0)

@@ -1,6 +1,5 @@
 import random
 from typing import Any
-from random import randint
 import gymnasium as gym
 import numpy as np
 from gymnasium.spaces import Discrete, Box
@@ -13,18 +12,18 @@ def manhattan_distance(a, b):
 
 
 class SnakeEnv(gym.Env):
-    def __init__(self, shape=(10, 10)):
+    def __init__(self, config: dict):
         super(SnakeEnv, self).__init__()
-        self.shape = shape
+        self.shape = config["shape"]
 
-        self.action_space = Discrete(3)
-        self.observation_space = Box(0.0, 1.0, (1, 11, shape[0], shape[1]), dtype=np.float32)
+        self.action_space = Discrete(4)
+        self.observation_space = Box(0.0, 1.0, (1, 11, self.shape[0], self.shape[1]), dtype=np.float32)
         self.reward_range = (-10., 20.)
 
-        self.tail = [(randint(0, self.shape[0] - 1), randint(0, self.shape[1] - 1))]
-        self.direction = randint(0, 3)
+        self.tail = [(self.shape[0] // 2, self.shape[1] // 2)]
+        self.direction = 0
 
-        self.observation = Observation(obs_shape=shape)
+        self.observation = Observation(obs_shape=self.shape)
 
         self.hunger = 0
         self.num_steps = 0
@@ -45,11 +44,7 @@ class SnakeEnv(gym.Env):
         self.hunger += 1
         self.num_steps += 1
 
-        if action == 0:
-            self.direction = (self.direction + 1) % 4
-
-        if action == 1:
-            self.direction = (self.direction - 1) % 4
+        self.direction = action
 
         head = [self.head[0], self.head[1]]
         head[self.direction % 2] += -1 if self.direction % 3 == 0 else 1
@@ -83,8 +78,8 @@ class SnakeEnv(gym.Env):
 
     def reset(self, *, seed=None, options=None):
         self.tail.clear()
-        self.tail.append((randint(0, self.shape[0] - 1), randint(0, self.shape[1] - 1)))
-        self.direction = randint(0, 3)
+        self.tail = [(self.shape[0] // 2, self.shape[1] // 2)]
+        self.direction = 0
 
         self.apple = self.make_apple()
         self.hunger = 0
@@ -113,9 +108,9 @@ class SnakeEnv(gym.Env):
 
         return random.sample(game_postions, 1)[0]
 
-    def evaluate(self, terminal, truncated):
+    def evaluate(self, terminal: bool, truncated: bool):
         if self.won:
-            return 2.0
+            return 5.0
 
         if terminal:
             return -1.0
@@ -136,6 +131,9 @@ class SnakeEnv(gym.Env):
         elif self.previous_distance < dist:
             self.previous_distance = dist
             return -0.0025
+
+        else:
+            return -0.0001
 
     @property
     def apple_count(self):
